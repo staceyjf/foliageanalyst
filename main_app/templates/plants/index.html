@@ -2,87 +2,39 @@
 {% load static %}
 {% block content %}
 
-<style>
-  .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-  }
-  
-</style>
-
     <main class="main_containter">
-
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
-
           <h1 class="fw-light mb-5">All the plants under your care</h1>
-    
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            {% for plant in plants %}
             <div class="col">
               <div class="card shadow-sm">
+                <!-- making the whole card clickable -->
+                <a href="{% url 'details' plant.id %}">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 <div class="card-body">
+
                   <!-- body content -->
-                  <h4 class="card-title text-black">NAME</h4>
-                  <p class="card-text text-black text-start">
-                    Watering frequency: <a href="#" class="text-decoration-none text-info">xxx</a><br>
-                    Light requirements: <a href="#" class="text-decoration-none text-info">xxx</a><br>
-                    Fertilization schedule: <a href="#" class="text-decoration-none text-info">xxx</a><br>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  </div>
+                  <h4 class="card-title text-black no-underline">{{ plant.name }}</h4>
+                  <p class="card-text text-black text-start no-underline">Plant type: {{ plant.plant_type }}</p>
+                  <p class="card-text text-black text-start no-underline">Plant type: {{ plant.location }}</p>
+                  <!-- is_healthy condition-->
+                  {% if plant.is_healthy %}
+                    <p class="card-text text-black text-start no-underline">I'm feeling healthy</p>
+                  {% else %}
+                    <p class="card-text text-danger text-start no-underline">Help! I'm in need of a bit more love</p>
+                  {% endif %}
                 </div>
+                </a>
               </div>
             </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
-                  <!-- body content -->
-                  <h4 class="card-title text-black">NAME</h4>
-                  <p class="card-text text-black text-start">
-                    Watering frequency: <a href="#" class="text-decoration-none text-info">xxx</a><br>
-                    Light requirements: <a href="#" class="text-decoration-none text-info">xxx</a><br>
-                    Fertilization schedule: <a href="#" class="text-decoration-none text-info">xxx</a><br>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
-                  <!-- body content -->
-                  <h4 class="card-title text-black">NAME</h4>
-                  <p class="card-text text-black text-start">
-                    Watering frequency: <a href="#" class="text-decoration-none text-info">xxx</a><br>
-                    Light requirements: <a href="#" class="text-decoration-none text-info">xxx</a><br>
-                    Fertilization schedule: <a href="#" class="text-decoration-none text-info">xxx</a><br>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
           </div>
+
         </div>
+      </div>
 
     </main>
 
