@@ -12,7 +12,7 @@ def about(request):
     return render(request, 'about.html')
 
 def plants_index(request):
-  plants = Plants.objects.all() # creating the all dict from Plants model
+  plants = Plants.objects.all().order_by('is_healthy','name') # creating the all dict from Plants model
   return render(request, 'plants/index.html', {
     'plants': plants # sharing it with the template
   })
