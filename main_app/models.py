@@ -1,7 +1,13 @@
 from django.db import models
 
-# import reserve for get_asbolute_url
+# import reserve for get_absolute_url
 from django.urls import reverse
+
+FERTILIZER = (
+    ('L', 'Liquid'),
+    ('S', 'Slow release pellets'), 
+    ('N', 'N/A'),
+)
 
 # Create your models here.
 class Plants(models.Model):
@@ -22,3 +28,21 @@ class Plants(models.Model):
     # for redirecting where :id is required in URL (could use success_url - think DRY)
     def get_absolute_url(self):
         return reverse('details', kwargs={'plant_id': self.id})
+    
+class PlantCare(models.Model):
+    date = models.DateField()
+    water_amount = models.IntegerField()
+    give_fertilizer = models.BooleanField()
+    FERTILIZER = models.CharField(
+        max_length=1,
+        choices=FERTILIZER,
+        default=FERTILIZER[2][0],
+    )
+    # add the plants ForeignKey 
+    plants = models.ForeignKey(
+        Plants,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return f'{self.get_fertilizer_display()} on {self.date}'
