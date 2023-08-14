@@ -5,18 +5,22 @@
 <!-- Section: About author -->
 <section class="mb-10">
     <div class="container">
+
       <div class="row gx-0 align-items-center">
         <div class="col-lg-1"></div>
 
         <div class="col-lg-10 mb-5 mb-lg-0">
-            <img src="{% static 'images/brina-blum-s5-NmxNA-7c-unsplash.jpg' %}" class="w-100" alt="xx" />
+          <img src="{% static 'images/brina-blum-s5-NmxNA-7c-unsplash.jpg' %}" class="w-100" alt="xx" />
         </div>
 
-        <div class="col-lg-1"></div>
+        <div class="col-lg-1"></div> 
+      </div>
+
+      <div class="row gx-0 align-items-center">
         <div class="col-lg-1"></div>
 
         <div class="col-lg-10 mb-5 mb-lg-0">
-          <div class="card rounded-7 me-lg-n5">
+          <div class="card me-lg-n5">
             <div class="card-body p-lg-5">
 
                 <h2 class="fw-bold">
@@ -41,8 +45,48 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-1"></div>
         
+        <div class="col-lg-1"></div>
+      </div>
+        
+      <!-- PlantCare-->
+      <div class="row gx-0 align-items-center">
+        <div class="col-lg-1"></div>
+
+        <div class="col-lg-10 mb-5 mb-lg-0">
+          <div class="card me-lg-n5">
+            <div class="card-body p-lg-5">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Water given</th>
+                    <th scope="col">Fertilizer given</th>
+                    <th scope="col">Fertilizer Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for watering in plant.plantcare_set.all %}
+                    <tr>
+                      <td>{{ watering.date }}</td>
+                      <td>{{ watering.water_amount }}</td>
+                      <!-- give_fertilizer condition-->
+                      {% if watering.give_fertilizer %}
+                      <td>Yes</td>
+                      {% else %}
+                      <td>No</td> 
+                      {% endif %}
+                      <td>{{ watering.get_fertilizer_display }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+ 
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-1"></div>
       </div>
     </div>
   </section>

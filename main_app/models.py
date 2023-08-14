@@ -30,19 +30,16 @@ class Plants(models.Model):
         return reverse('details', kwargs={'plant_id': self.id})
     
 class PlantCare(models.Model):
-    date = models.DateField()
-    water_amount = models.IntegerField()
+    date = models.DateField('watering date')
+    water_amount = models.DecimalField(max_digits=5, decimal_places=2)
     give_fertilizer = models.BooleanField()
-    FERTILIZER = models.CharField(
+    fertilizer = models.CharField(
         max_length=1,
         choices=FERTILIZER,
         default=FERTILIZER[2][0],
     )
     # add the plants ForeignKey 
-    plants = models.ForeignKey(
-        Plants,
-        on_delete=models.CASCADE
-    )
-
+    plant = models.ForeignKey(Plants, on_delete=models.CASCADE)
+    
     def __str__(self):
-        return f'{self.get_fertilizer_display()} on {self.date}'
+        return f"{self.get_fertilizer_display()} on {self.date}"
