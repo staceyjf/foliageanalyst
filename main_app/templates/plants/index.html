@@ -12,20 +12,21 @@
             <div class="col">
               <div class="card shadow-sm">
                 <!-- making the whole card clickable -->
-                <a href="{% url 'details' plant.id %}">
+                <a href="{% url 'details' plant.id %}" class="no-underline">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 <div class="card-body">
 
                   <!-- body content -->
-                  <h4 class="card-title text-black no-underline">{{ plant.name }}</h4>
-                  <p class="card-text text-black text-start no-underline">Plant type: {{ plant.plant_type }}</p>
-                  <p class="card-text text-black text-start no-underline">Plant type: {{ plant.location }}</p>
+                  <h4 class="card-title text-black ">{{ plant.name }}</h4>
+                  <p class="card-text text-black text-start ">Plant type: {{ plant.plant_type }}</p>
+                  <p class="card-text text-black text-start ">Plant type: {{ plant.location }}</p>
                   <!-- is_healthy condition-->
                   {% if plant.is_healthy %}
-                    <p class="card-text text-black text-start no-underline">I'm feeling healthy</p>
+                    <p class="card-text text-black text-start ">I'm feeling healthy</p>
                   {% else %}
-                    <p class="card-text text-danger text-start no-underline">Help! I'm in need of a bit more love</p>
+                    <p class="card-text text-danger text-start ">Help! I'm in need of a bit more love</p>
                   {% endif %}
+
                 </div>
                 </a>
               </div>

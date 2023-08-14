@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{%  block content %}
+
+<!-- customizing based on CBV -->
+{% if object %}
+    <h1 class="fw-light mb-5">Edit {{ plants.name }}</h1>
+{% else %}
+    <h1 class="fw-light mb-5">Add a plant</h1>
+{% endif %}
+
+    <div class="row gx-0 align-items-center">
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-8">
+            <form action="" method="POST" class="bg-light text-black text-start p-5">
+                {% csrf_token %}
+                <table class="w-100">
+                    {{ form.as_table }}
+                </table>
+                <br>
+                <input type="submit" value="Submit" class="btn btn-secondary">
+            </form>
+        </div>
+
+        <div class="col-lg-2"></div>
+    </div>
+
+{% endblock%}
