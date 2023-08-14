@@ -2,6 +2,8 @@ from django.db import models
 
 # import reserve for get_absolute_url
 from django.urls import reverse
+#importing a validator
+from django.core.validators import MinValueValidator
 
 FERTILIZER = (
     ('L', 'Liquid'),
@@ -31,7 +33,10 @@ class Plants(models.Model):
     
 class PlantCare(models.Model):
     date = models.DateField('watering date')
-    water_amount = models.DecimalField(max_digits=5, decimal_places=2)
+    water_amount = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2,
+        validators=[MinValueValidator(0)])
     give_fertilizer = models.BooleanField()
     fertilizer = models.CharField(
         max_length=1,

@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # model import - best practice is to call it singular which I will have to do next time
 from .models import Plants
+from .forms import CareForm
 
 # Created views
 def home(request):
@@ -23,8 +24,10 @@ def plant_detail(request, plant_id):
   # define your variable, get() is like getOne in mongoose 
   # pass in the id to identify the object
   plant = Plants.objects.get(id=plant_id)
+  care_form = CareForm()
   return render(request, 'plants/details.html', {
-     'plant': plant # sharing it with the template
+     'plant': plant, # sharing it with the template
+     'care_form' : care_form
   })
 
 class PlantCreate(CreateView):
@@ -41,3 +44,16 @@ class PlantDelete(DeleteView):
    model = Plants
    success_url = '/plants'
    # once the details page is detailed, redirect to the all plants page
+
+# related models
+# writing the code for processing the FeedingForm
+def add_care(request, plant_id):
+  # create a modelform instance using the data from the form
+  # request.POST gives us access to that data
+  form = CareForm(request.POST)
+  if form.is_valid():
+    new_care = form.save(commit=False)
+    new_care.plant_id = plant_id
+    new_care.save()
+    #need the cat id as its passed into the URL
+  return redirect('details', plant_id=plant_id)

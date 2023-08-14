@@ -19,7 +19,7 @@
       <div class="row gx-0 align-items-center">
         <div class="col-lg-1"></div>
 
-        <div class="col-lg-10 mb-5 mb-lg-0">
+        <div class="col-lg-10 mb-5 mb-lg-0 ">
           <div class="card me-lg-n5">
             <div class="card-body p-lg-5">
 
@@ -53,9 +53,12 @@
       <div class="row gx-0 align-items-center">
         <div class="col-lg-1"></div>
 
-        <div class="col-lg-10 mb-5 mb-lg-0">
+        <div class="col-lg-10 mb-5 mb-lg-0 mt-1">
           <div class="card me-lg-n5">
             <div class="card-body p-lg-5">
+              <h2 class="fw-bold">
+                <span class="text-muted">Care schedule</span>
+              </h2>
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -88,7 +91,35 @@
         
         <div class="col-lg-1"></div>
       </div>
+
+      <!-- CareForm-->
+      <div class="row gx-0 align-items-center">
+        <div class="col-lg-1"></div>
+
+        <div class="col-lg-10 mb-5 mb-lg-0 text-black text-start mt-1">
+          <div class="card me-lg-n5">
+            <div class="card-body p-lg-5">
+            <form action="{% url 'add_care' plant.id %}" method="POST">
+              {% csrf_token %}
+              <!-- Render the inputs -->
+              {{ care_form.as_p }}
+              <input type="submit" class="btn btn-secondary text-white" value="Add Care">
+            </form>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-1"></div>
+      </div>
     </div>
   </section>
+
+  <!-- client side Javascript -->
+  <!-- not sure how to add the relevant picker class to the above - if statement? -->
+  <script type="text/javascript">
+    $(function () {
+        $('#picker').datetimepicker();
+    });
+ </script>
  
 {% endblock %}

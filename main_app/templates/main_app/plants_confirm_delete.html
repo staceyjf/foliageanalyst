@@ -11,7 +11,7 @@
 
       <form action="" method="POST" class="text-center">
         {% csrf_token %}
-        <input type="submit" value="Yes" class="btn btn-secondary">
+        <input type="submit" value="Yes" class="btn btn-secondary text-white">
         <!-- provides the exit clause in case user error -->
         <a href="{% url 'details' object.id %}" class="no-underline">Cancel</a>
       </form>
