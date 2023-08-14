@@ -4,6 +4,8 @@ from django.db import models
 from django.urls import reverse
 #importing a validator
 from django.core.validators import MinValueValidator
+# adding the date
+from datetime import date, timedelta, datetime
 
 FERTILIZER = (
     ('L', 'Liquid'),
@@ -31,6 +33,12 @@ class Plants(models.Model):
     def get_absolute_url(self):
         return reverse('details', kwargs={'plant_id': self.id})
     
+    #logic to see if the plant has been watered in the last 7 days
+    # adding on __gte for greater than or equal to 7 days ago
+    def watered_this_week(self):
+        seven_days_ago = datetime.now() - timedelta(weeks=1)
+        return self.plantcare_set.filter(date__gte=seven_days_ago).exists()
+    
 class PlantCare(models.Model):
     date = models.DateField('watering date')
     water_amount = models.DecimalField(
@@ -48,3 +56,6 @@ class PlantCare(models.Model):
     
     def __str__(self):
         return f"{self.get_fertilizer_display()} on {self.date}"
+    
+    class Meta:
+        ordering = ['-date']

@@ -31,11 +31,17 @@
                   Plant location: {{ plant.location }}
                   <!-- is_healthy condition-->
                   {% if plant.is_healthy %}
-                      <p class="card-text text-success text-start no-underline">I'm feeling healthy</p>
+                      <p class="card-text text-success text-start no-underline">Health: I'm feeling healthy</p>
                   {% else %}
-                      <p class="card-text text-danger text-start no-underline">Help! I'm in need of a bit more love</p>
+                      <p class="card-text text-danger text-start no-underline">Health: Help! I'm in need of a bit more love overall as I don't look great</p>
                   {% endif %}
                 </p>
+                  <!-- watering logic -->
+                    {% if plant.watered_this_week %}
+                    <p class="card-text text-success text-start no-underline">Weekly care: {{plant.name}} has had their watering this week</p>
+                    {% else %}
+                    <p class="card-text text-danger text-start no-underline">Weekly care: {{plant.name}} might need a bit of water</p>
+                    {% endif %}
 
                   <!-- edit/delete btns -->
                   <br>

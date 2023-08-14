@@ -48,10 +48,10 @@ class PlantDelete(DeleteView):
 # related models
 # writing the code for processing the FeedingForm
 def add_care(request, plant_id):
-  # create a modelform instance using the data from the form
-  # request.POST gives us access to that data
-  form = CareForm(request.POST)
+  form = CareForm(request.POST) 
+  # like req.body
   if form.is_valid():
+    # wait to associate before saving
     new_care = form.save(commit=False)
     new_care.plant_id = plant_id
     new_care.save()
