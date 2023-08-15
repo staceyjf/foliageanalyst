@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 
 # model import - best practice is to call it singular which I will have to do next time
-from .models import Plants
+from .models import Plants, Carer
 from .forms import CareForm
 
 # Created views
@@ -57,3 +58,22 @@ def add_care(request, plant_id):
     new_care.save()
     #need the cat id as its passed into the URL
   return redirect('details', plant_id=plant_id)
+
+# Carer CRUD
+class CarerList(ListView):
+  model = Carer
+
+class CarerDetail(DetailView):
+  model = Carer
+
+class CarerCreate(CreateView):
+  model = Carer
+  fields = '__all__'
+
+class CarerUpdate(UpdateView):
+  model = Carer
+  fields = ['name', 'color']
+
+class CarerDelete(DeleteView):
+  model = Carer
+  success_url = '/carers'
