@@ -5,7 +5,7 @@ from django.urls import reverse
 #importing a validator
 from django.core.validators import MinValueValidator
 # adding the date
-from datetime import date, timedelta, datetime
+from datetime import timedelta, datetime
 
 FERTILIZER = (
     ('L', 'Liquid'),
@@ -13,7 +13,20 @@ FERTILIZER = (
     ('N', 'N/A'),
 )
 
-# Create your models here.
+# carer Model
+class Carer(models.Model):
+    name = models.CharField(max_length=100)
+    nickname = models.CharField(max_length=100)
+
+    #overwrite __str__
+    def __str__(self):
+        return self.name
+    
+    # define get_absolute_url with carer.id params
+    def get_absolute_url(self):
+        return reverse('carers_details', kwargs={'pk': self.id})
+
+# Plant Model
 class Plants(models.Model):
     name = models.CharField(max_length=100)
     plant_type = models.CharField(max_length=100)
@@ -25,6 +38,8 @@ class Plants(models.Model):
         ('other', 'Other')
     ])
     is_healthy = models.BooleanField()
+    # create the carer Model
+    carers = models.ManyToManyField(Carer)
 
     def __str__(self):
         return f'{self.name} is a {self.plant_type} and is plant number {self.id}'
