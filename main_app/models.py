@@ -24,7 +24,7 @@ class Carer(models.Model):
     
     # define get_absolute_url with carer.id params
     def get_absolute_url(self):
-        return reverse('carers_details', kwargs={'pk': self.id})
+        return reverse('carers_detail', kwargs={'pk': self.id})
 
 # Plant Model
 class Plants(models.Model):
