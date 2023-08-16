@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="fw-light mb-5">Delete a carer</h1>
+  <div class="row gx-0 align-items-center">
+
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 bg-light text-black text-start p-5">
+      <h4>Are you sure you want to delete {{ object.name }}?</h4>
+      <br>
+
+      <form action="" method="POST" class="text-center">
+        {% csrf_token %}
+        <input type="submit" value="Yes" class="btn btn-secondary text-white">
+        <!-- provides the exit clause in case user error -->
+        <a href="{% url 'carers_detail' object.id %}" class="no-underline">Cancel</a>
+      </form>
+    </div>
+
+    <div class="col-lg-2"></div>
+  </div>
+  
+{% endblock %}

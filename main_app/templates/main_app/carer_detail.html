@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Section: About author -->
+<section class="mb-10">
+    <div class="container">
+
+      <div class="row gx-0 align-items-center">
+        <div class="col-lg-1"></div>
+
+        <div class="col-lg-10 mb-2 mb-lg-0">
+          <img src="{% static 'images/brina-blum-s5-NmxNA-7c-unsplash.jpg' %}" class="w-100" alt="xx" />
+        </div>
+
+        <div class="col-lg-1"></div> 
+      </div>
+
+      <div class="row gx-0 align-items-center">
+        <div class="col-lg-1"></div>
+
+        <div class="col-lg-10 mb-5 mb-lg-0 ">
+          <div class="card me-lg-n5">
+            <div class="card-body p-lg-5">
+
+                <h2 class="fw-bold">
+                  <span class="text-muted">Getting to know {{ object.name }}</span>
+                </h2>
+                <p class="text-muted text-start no-underline">
+                  Known around the house as '{{ object.nickname }}''
+                </p>
+                  <!-- edit/delete btns -->
+                  <br>
+                  <a href="{% url 'carers_update' carer.id %}" class="btn btn-secondary text-white">Edit</a>
+                  <a href="{% url 'carers_delete' carer.id %}" class="btn btn-secondary text-white">Delete</a>
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-1"></div>
+      </div>
+ 
+{% endblock %}

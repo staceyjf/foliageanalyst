@@ -26,9 +26,9 @@
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Home</a>
                 <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="{% url 'about' %}">About</a>
-                <a class="nav-link {% if request.path == '/plants/create/' %}active{% endif %}" href="{% url 'carers_create' %}">Add Carer</a>
+                <a class="nav-link {% if request.path == '/carers/create/' %}active{% endif %}" href="{% url 'carers_create' %}">Add Carer</a>
                 <a class="nav-link {% if request.path == '/carers/' %}active{% endif %}" href="{% url 'carers_index' %}">All Carers</a>
-                <a class="nav-link {% if request.path == '/carers/create/' %}active{% endif %}" href="{% url 'plants_create' %}">Add Plant</a>
+                <a class="nav-link {% if request.path == '/plants/create/' %}active{% endif %}" href="{% url 'plants_create' %}">Add Plant</a>
                 <a class="nav-link {% if request.path == '/plants/' %}active{% endif %}" href="{% url 'index' %}">All Plants</a>
             </nav>
         </div>

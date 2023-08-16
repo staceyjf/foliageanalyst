@@ -25,15 +25,20 @@ def plant_detail(request, plant_id):
   # define your variable, get() is like getOne in mongoose 
   # pass in the id to identify the object
   plant = Plants.objects.get(id=plant_id)
+  # define the carer's assoc with a plant
+  id_list = plant.carers.all().values_list('id')
+  carers_assoc_with_plant = Carer.objects.exclude(id__in=id_list)
+
   care_form = CareForm()
   return render(request, 'plants/details.html', {
      'plant': plant, # sharing it with the template
-     'care_form' : care_form
+     'care_form' : care_form,
+     'carers': carers_assoc_with_plant,
   })
 
 class PlantCreate(CreateView):
    model = Plants
-   fields = '__all__'
+   fields = ['name', 'plant_type', 'location', 'is_healthy']
    # need all the fields to add a plant
 
 class PlantUpdate(UpdateView):
@@ -72,8 +77,20 @@ class CarerCreate(CreateView):
 
 class CarerUpdate(UpdateView):
   model = Carer
-  fields = ['name', 'color']
+  fields = ['nickname']
 
 class CarerDelete(DeleteView):
   model = Carer
   success_url = '/carers'
+
+# check inspector to see the association is made from 
+# the template before you write this
+def assoc_carer(request, plant_id, carer_id):
+  #add and remove() will also take ids 
+  Plants.objects.get(id=plant_id).carers.add(carer_id)
+  return redirect('details', plant_id=plant_id)
+
+def remove_carer(request, plant_id, carer_id):
+  #add and remove() will also take ids 
+  Plants.objects.get(id=plant_id).carers.remove(carer_id)
+  return redirect('details', plant_id=plant_id)

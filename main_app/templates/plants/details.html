@@ -117,7 +117,73 @@
         
         <div class="col-lg-1"></div>
       </div>
+
+  <!-- assoc carers with plants -->
+  <div class="row gx-0 align-items-center">
+    <div class="col-lg-1"></div>
+
+  <div class="col s6">
+    <h3>Who should look after me:</h3>
+    {% if carers.count %}
+      {% for carer in carers.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              <span>{{ carer.name }} aka '{{ carer.name }}'</span> 
+            </span>
+          </div>
+
+          <div class="card-action">
+            <form action="{% url 'assoc_carer' plant.id carer.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-secondary text-white">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{plant.name}} is well looked after - everyone in the house is responsible
+        for their care</h5>
+    {% endif %}
+  </div>  
+    <div class="col-lg-1"></div>
+  </div>
+
+    
+  <div class="row gx-0 align-items-center">
+    <div class="col-lg-1"></div>
+
+    <div class="col s6">
+      <h3>{{ plant.name }} is looked after by:</h3>
+      <!-- list of carers  -->
+      <!-- if there are plants in count -->
+      {% if plant.carers.count %}
+        {% for carer in plant.carers.all %}
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">
+                <span>{{ carer.name }}</span>
+              </span>
+            </div>
+            <!-- remove carers from plants-->
+            <div class="card-action">
+              <form action="{% url 'remove_carer' plant.id carer.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary text-white">Remove</button>
+              </form>
+            </div>
+
+          </div>
+        {% endfor %}
+      {% else %}
+        <h5>Help someone needs to look after me</h5>
+      {% endif %}
     </div>
+
+    <div class="col-lg-1"></div>
+  </div>
+
+  </div>
   </section>
 
   <!-- client side Javascript -->
