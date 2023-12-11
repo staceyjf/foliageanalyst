@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
+# from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
 # model import - best practice is to call it singular which I will have to do next time
 from .models import Plants, Carer
@@ -49,7 +50,7 @@ class PlantUpdate(UpdateView):
 class PlantDelete(DeleteView):
    model = Plants
    success_url = '/plants'
-   # once the details page is detailed, redirect to the all plants page
+   # once the details page is deleted, redirect to the all plants page
 
 # related models
 # writing the code for processing the FeedingForm

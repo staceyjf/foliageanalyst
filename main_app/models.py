@@ -1,5 +1,4 @@
 from django.db import models
-
 # import reserve for get_absolute_url
 from django.urls import reverse
 #importing a validator
