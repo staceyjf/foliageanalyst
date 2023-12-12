@@ -14,7 +14,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body fixed-top" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #FEDC3D;">
         <div class="container">
           <a class="navbar-brand" href="{% url 'home' %}"><span class="fw-bold">Foliage</span>Analyst</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,6 +27,9 @@
                 </li>
                 <li class="nav-item">
                 <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="{% url 'about' %}">Plant Doc</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link {% if request.path == '/carers/create/' %}active{% endif %}" href="{% url 'carers_create' %}">Add Carer</a>
