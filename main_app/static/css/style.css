@@ -74,7 +74,6 @@ body {
 .navbar-brand{
   font-size: 25px;
   transform: uppercase;
-  font-weight: 700;
   letter-spacing: 2px;
 }
 
@@ -149,7 +148,9 @@ body {
 }
 
 .span-list {
-  color: black
+  color: black;
+  display: block;
+  padding-bottom: 5px;
 }
 
 /* responsive CSS */

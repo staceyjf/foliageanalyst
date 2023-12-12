@@ -2,41 +2,40 @@
 {% load static %}
 {% block content %}
 
-    <main class="main_containter">
-      <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-          <h1 class="fw-light mb-5">All the plants under your care</h1>
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-            {% for plant in plants %}
-            <div class="col">
-              <div class="card shadow-sm">
-                <!-- making the whole card clickable -->
-                <a href="{% url 'details' plant.id %}" class="no-underline">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
-
-                  <!-- body content -->
-                  <h4 class="card-title text-black ">{{ plant.name }}</h4>
-                  <p class="card-text text-black text-start ">Plant type: {{ plant.plant_type }}</p>
-                  <p class="card-text text-black text-start ">Plant type: {{ plant.location }}</p>
-                  <!-- is_healthy condition-->
-                  {% if plant.is_healthy %}
-                    <p class="card-text text-black text-start ">I'm feeling healthy</p>
-                  {% else %}
-                    <p class="card-text text-danger text-start ">Help! I'm in need of a bit more love</p>
-                  {% endif %}
-
-                </div>
-                </a>
-              </div>
+<main id="carer" class="main-styling">
+  <div class="container">
+    <div class="section-header text-center pb5">
+      <h2>All the plants under your care</h2>
+      <p>Discover the dedicated individuals responsible for tending to the green 
+        life within your home. </p>
+    </div>
+    <div id="plant_wrapper" class="wrapper">
+      {% for plant in plants %}
+      <div class="product-area">
+        <div class="img-area">
+          <img src="{% static 'images/avt.png' %}" alt="">
+          <div class="product-overlay">
+            <div class="overlay">
+              <a href="{% url 'details' plant.id %}" class="btn-1">View Details</a>
             </div>
-            {% endfor %}
           </div>
-
+        </div>
+        
+        <div class="info-area">
+          <h3>{{ plant.name }}</h3>
+          <span class="span-list"><span class="fw-bold">Plant type:</span> {{ plant.plant_type }}</span>
+          <span class="span-list"><span class="fw-bold">Plant location:</span>  {{ plant.location }}</span>
+          <!-- is_healthy condition-->
+          {% if plant.is_healthy %}
+            <span class="span-list">I'm feeling healthy</span>
+          {% else %}
+            <span class="span-list text-danger">Help! I'm in need of a bit more attention</p>
+          {% endif %}
         </div>
       </div>
-
-    </main>
+      {% endfor %}
+    </div>
+</div>
+</main>
 
 {% endblock %}
