@@ -2,35 +2,35 @@
 {% load static %}
 {% block content %}
 
-    <main class="main_containter">
-      <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-          <h1 class="fw-light mb-5">Whose looking after the plants in your house</h1>
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-            <!-- Accessing _list give we are using CBVs -->
-            {% for carer in carer_list %}
-            <div class="col">
-              <div class="card shadow-sm">
-                <!-- making the whole card clickable -->
-                <a href="{% url 'carers_detail' carer.id %}" class="no-underline">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
-
-                  <!-- body content -->
-                  <h4 class="card-title text-black ">{{ carer.name }}</h4>
-                  <p class="card-text text-black text-start ">Known by: '{{ carer.nickname  }}'</p>
-
-                </div>
-                </a>
+<main id="carer" class="main-styling">
+    <div class="container">
+      <div class="section-header text-center pb5">
+        <h2>Discover Your Household Green Guardians</h2>
+        <p>Discover the dedicated individuals responsible for tending to the green 
+          life within your home. </p>
+      </div>
+      <div class="wrapper">
+        {% for carer in carer_list %}
+        <div class="product-area">
+          <div class="img-area">
+            <img src="{% static 'images/avt.png' %}" alt="">
+            <div class="product-overlay">
+              <div class="overlay">
+                <a href="{% url 'carers_detail' carer.id %}" class="btn-1">View Details</a>
               </div>
             </div>
-            {% endfor %}
           </div>
-
+          
+          <div class="info-area">
+            <h3>{{ carer.name }}</h3>
+            <span class="span-list">Known as:</span>
+            <span class="span-list">{{ carer.nickname }}</span>
+          </div>
         </div>
+        {% endfor %}
       </div>
-
-    </main>
-
+  </div>
+</main>
+       
 {% endblock %}
