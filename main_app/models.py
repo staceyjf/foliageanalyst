@@ -16,6 +16,7 @@ FERTILIZER = (
 class Carer(models.Model):
     name = models.CharField(max_length=100)
     nickname = models.CharField(max_length=100)
+    # TODO: ADD IMAGE FIELD
 
     #overwrite __str__
     def __str__(self):

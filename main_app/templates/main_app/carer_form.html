@@ -1,38 +1,27 @@
 {% extends 'base.html' %}
 {% load static %}
 {%  block content %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
-<!-- adding images -->
-<div class="col-lg-1"></div>
-
-<div class="col-lg-12 mb-5 mb-lg-0">
-    <img src="{% static 'images/prudence-earl-NwBx723XaHw-unsplash.jpg' %}" class="w-75 m-5" alt="Images of indoor plants" />
-</div>
-
-<div class="col-lg-1"></div>
-
-<!-- customizing based on CBV - same as Plants -->
-{% if object %}
-    <h1 class="fw-light mb-5">Edit {{ object.name }}</h1>
-{% else %}
-    <h1 class="fw-light mb-5">Add a carer</h1>
-{% endif %}
-
-    <div class="row gx-0 align-items-center">
-        <div class="col-lg-2"></div>
-
-        <div class="col-lg-8">
-            <form action="" method="POST" class="bg-light text-black text-start p-5">
-                {% csrf_token %}
-                <table class="w-100">
-                    {{ form.as_table }}
-                </table>
-                <br>
-                <input type="submit" value="Submit" class="btn btn-secondary text-white">
-            </form>
+<main id="add-plant" class="main-styling">
+    <div class="container">
+        <div class="section-header text-center pb5">
+            {% if object %}
+            <h2>Edit {{ object.name }}</h2>
+            {% else %}
+            <h2>Add a new carer to your household</h2>
+            {% endif %}
         </div>
 
-        <div class="col-lg-2"></div>
-    </div>
+        <form action="" method="POST" class="text-black">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.name|as_crispy_field }}
+                {{ form.nickname|as_crispy_field }}
+            </div>
+                <input type="submit" value="Submit" class="btn btn-secondary">
+        </form>
+</main>
 
 {% endblock%}
