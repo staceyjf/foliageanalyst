@@ -24,11 +24,11 @@ The application performs user centric CRUD (Create, Read, Update, Delete).
 
 ## About the Web App
 
-Welcome to Mayday Mum – your trusted Northern Beaches destination for overnight nannying services. 
+Welcome to Leaf Guardian – the go-to platform for plant enthusiasts seeking a seamless solution to monitor and nurture their leafy companions. W
 
-We understand that every parent needs a helping hand, especially during those long nights. Our fixed nightly fee covers a full 12 hours of dedicated support, so you can rest easy knowing your little ones are in caring hands. 
+e recognize that caring for indoor foliage is an art, and we're here to make it both enjoyable and effortless for you. Our user-friendly web app empowers you to effortlessly record and track the well-being of your household plants, ensuring they receive the attention they deserve. Whether it's watering, feeding, or simply basking in the sunlight, Leaf Guardian is your trusted companion, offering a holistic approach to plant care. 
 
-Join our Mayday Mum family today, and let us make your nights more peaceful and your mornings brighter.
+Join our community today and let us help you cultivate a thriving and vibrant indoor garden.
 
 ## User stories
 - I want to add, edit and delete a carer
