@@ -24,170 +24,172 @@
               </span>
               <a href="{% url 'plants_update' plant.id %}" class="btn btn-secondary text-white">Edit</a>
               <a href="{% url 'plants_delete' plant.id %}" class="btn btn-secondary text-white">Delete</a>
-            </div> 
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Column 2 -->
       <div class="col-lg-8 col-md-8 col-sm-12">
+        <div class="row">
+          <!-- Row 1 of Column 2 -->
+          <div class="col-lg-12">
             <div class="wrapper-details">
               <div class="plant-details-right-container">
-                  <h2 class="about-h2">How I'm feeling</h2>
-                  <!-- is_healthy condition-->
-                  {% if plant.is_healthy %}
-                  <p class="card-text text-success text-start no-underline">Health: I'm feeling healthy</p>
+                <h2 class="about-h2">How I'm feeling</h2>
+                <!-- is_healthy condition-->
+                {% if plant.is_healthy %}
+                <p class="card-text text-success text-start no-underline">Health: I'm feeling healthy</p>
+                {% else %}
+                <p class="card-text text-danger text-start no-underline">Health: Help! I'm in need of a bit more love overall as I don't look great</p>
+                {% endif %}
+                <!-- watering logic -->
+                {% if plant.watered_this_week %}
+                <p class="card-text text-success text-start no-underline">Water intake: {{plant.name}} has had their watering this week</p>
+                {% else %}
+                <p class="card-text text-danger text-start no-underline">Water intake: {{plant.name}} might need a bit of water</p>
+                {% endif %}
+
+                <!-- list of carers who look after the plant -->
+                <!-- if there are plants in count -->
+                <span id="carer-for-plant">
+                  {% if plant.carers.count %}
+                    {% for carer in plant.carers.all %}
+                      <p class="card-text text-black text-start no-underline">Looked after by: {{ carer.name }}
+                        <!-- remove carers from plants-->
+                        <form action="{% url 'remove_carer' plant.id carer.id %}" method="POST">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-secondary text-white">Remove</button>
+                        </form>
+                      </p>
+                    {% endfor %}
                   {% else %}
-                  <p class="card-text text-danger text-start no-underline">Health: Help! I'm in need of a bit more love overall as I don't look great</p>
+                    <h5>Help someone needs to look after me</h5>
                   {% endif %}
-                  <!-- watering logic -->
-                  {% if plant.watered_this_week %}
-                  <p class="card-text text-success text-start no-underline">Water intake: {{plant.name}} has had their watering this week</p>
-                  {% else %}
-                  <p class="card-text text-danger text-start no-underline">Water intake: {{plant.name}} might need a bit of water</p>
-                  {% endif %}
-                   <!-- list of carers  -->
-            <!-- if there are plants in count -->
-            {% if plant.carers.count %}
-            {% for carer in plant.carers.all %}
-             
-                    <p class="card-text text-black text-start no-underline">Looked after by: {{ carer.name }}
-              
-    
-                <!-- remove carers from plants-->
-                  <form action="{% url 'remove_carer' plant.id carer.id %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-secondary text-white">Remove</button>
-                  </form>
-             
-                </p>
+
+                  <!-- Button to trigger the overlay -->
+                  <button id="openOverlayButton" class="btn btn-secondary text-white">Add more carers</button>
+
+                  <!-- Overlay Container -->
+                  <div id="overlayContainer" class="overlay-container">
+                    <div class="overlay-content">
+                      <div class="wrapper-details" id="add-carer">
+                        <h3>Who should look after me:</h3>
+                        {% if carers.count %}
+                          {% for carer in carers.all %}
+                            <div class="card">
+                              <div class="card-content">
+                                <span class="card-title">
+                                  <span>{{ carer.name }} aka '{{ carer.name }}'</span>
+                                </span>
+                              </div>
+                              <div class="card-action">
+                                <form action="{% url 'assoc_carer' plant.id carer.id %}" method="POST">
+                                  {% csrf_token %}
+                                  <button type="submit" class="btn btn-secondary text-white">Add</button>
+                                </form>
+                              </div>
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                          <h5>{{plant.name}} is well looked after - everyone in the house is responsible for their care</h5>
+                        {% endif %}
+                      </div>
+                      <button id="closeOverlayButton" class="btn btn-secondary text-white">Close</button>
+                    </div>
+                  </div>
+                </span>
               </div>
-            {% endfor %}
-          {% else %}
-            <h5>Help someone needs to look after me</h5>
-          {% endif %}
             </div>
           </div>
-    </div>
 
-    <!-- Second Row -->
-    <div class="row" id="add-plant-care">
-      <!-- Column 1-3 -->
-      <div class="col-lg-6">
-        <div class="wrapper-details">
-          <h2 class="about-h2">Care schedule</h2>
-                  <table class="table table-striped">
-                    <caption>Care schedule</caption>
-                    <thead>
-                      <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Water given</th>
-                        <th scope="col">Fertilizer given</th>
-                        <th scope="col">Fertilizer Type</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for watering in plant.plantcare_set.all %}
-                        <tr>
-                          <td>{{ watering.date }}</td>
-                          <td>{{ watering.water_amount }}</td>
-                          <!-- give_fertilizer condition-->
-                          {% if watering.give_fertilizer %}
-                          <td>Yes</td>
-                          {% else %}
-                          <td>No</td> 
-                          {% endif %}
-                          <td>{{ watering.get_fertilizer_display }}</td>
-                        </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>              <table class="table table-striped">
-                    <caption>Care schedule</caption>
-                    <thead>
-                      <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Water given</th>
-                        <th scope="col">Fertilizer given</th>
-                        <th scope="col">Fertilizer Type</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for watering in plant.plantcare_set.all %}
-                        <tr>
-                          <td>{{ watering.date }}</td>
-                          <td>{{ watering.water_amount }}</td>
-                          <!-- give_fertilizer condition-->
-                          {% if watering.give_fertilizer %}
-                          <td>Yes</td>
-                          {% else %}
-                          <td>No</td> 
-                          {% endif %}
-                          <td>{{ watering.get_fertilizer_display }}</td>
-                        </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-        </div>
-      </div>
-
-      <div class="col-lg-6">
-        <div class="wrapper-details">
-          <form action="{% url 'add_care' plant.id %}" method="POST">
-            {% csrf_token %}
-            <!-- Render the inputs -->
-            {{ care_form.as_p }}
-            <input type="submit" class="btn btn-secondary text-white" value="Add Care">
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <!-- Third Row -->
-    <div class="row" id="add-carer-plant">
-      <!-- Column 1-3 -->
-      <div class="col-lg-6">
-        <div class="wrapper-details">
-          <!-- Content for the second column of the third row goes here -->
-        </div>
-      </div>
-
-      <div class="col-lg-6">
-        <div class="wrapper-details">
-          <h3>Who should look after me:</h3>
-          {% if carers.count %}
-            {% for carer in carers.all %}
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">
-                    <span>{{ carer.name }} aka '{{ carer.name }}'</span> 
-                  </span>
-                </div>
-      
-                <div class="card-action">
-                  <form action="{% url 'assoc_carer' plant.id carer.id %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-secondary text-white">Add</button>
-                  </form>
+          <!-- Row 2 of Column 2 -->
+          <div class="col-lg-12">
+            <div class="wrapper-details">
+              <div class="plant-details-right-container" id="plant-care">
+                <h2 class="about-h2">Care schedule</h2>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Date</th>
+                      <th scope="col">Water given</th>
+                      <th scope="col">Fertilizer given</th>
+                      <th scope="col">Fertilizer Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for watering in plant.plantcare_set.all %}
+                    <tr>
+                      <td>{{ watering.date }}</td>
+                      <td>{{ watering.water_amount }}</td>
+                      <!-- give_fertilizer condition-->
+                      {% if watering.give_fertilizer %}
+                      <td>Yes</td>
+                      {% else %}
+                      <td>No</td>
+                      {% endif %}
+                      <td>{{ watering.get_fertilizer_display }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <!-- Second Overlay Trigger Button -->
+                <button id="openSecondOverlayButton" class="btn btn-secondary text-white">Add a feed</button>
+                <!-- Second Overlay Container -->
+                <div id="secondOverlayContainer" class="overlay-container">
+                  <div class="overlay-content">
+                    <div class="wrapper-details" id="feed-overlay">
+                      <h3>Content for the Second Overlay:</h3>
+                      <div class="wrapper-details">
+                        <form action="{% url 'add_care' plant.id %}" method="POST">
+                          {% csrf_token %}
+                          <!-- Render the inputs -->
+                          {{ care_form.as_p }}
+                          <input type="submit" class="btn btn-secondary text-white" value="Add Care">
+                        </form>
+                      </div>
+                    </div>
+                    <button id="closeSecondOverlayButton" class="btn btn-secondary text-white">Close</button>
+                  </div>
                 </div>
               </div>
-            {% endfor %}
-          {% else %}
-            <h5>{{plant.name}} is well looked after - everyone in the house is responsible
-              for their care</h5>
-          {% endif %}
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 </main>
 
+<!-- client side Javascript -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const openButton = document.getElementById('openOverlayButton');
+    const closeButton = document.getElementById('closeOverlayButton');
+    const overlayContainer = document.getElementById('overlayContainer');
 
-  <!-- client side Javascript -->
-  <!-- not sure how to add the relevant picker class to the above - if statement? -->
-  <script type="text/javascript">
-    $(function () {
-        $('#picker').datetimepicker();
+    openButton.addEventListener('click', function () {
+      overlayContainer.style.display = 'block';
     });
- </script>
- 
+
+    closeButton.addEventListener('click', function () {
+      overlayContainer.style.display = 'none';
+    });
+
+    // Second Overlay
+    const openSecondOverlayButton = document.getElementById('openSecondOverlayButton');
+    const closeSecondOverlayButton = document.getElementById('closeSecondOverlayButton');
+    const secondOverlayContainer = document.getElementById('secondOverlayContainer');
+
+    openSecondOverlayButton.addEventListener('click', function () {
+      secondOverlayContainer.style.display = 'block';
+    });
+
+    closeSecondOverlayButton.addEventListener('click', function () {
+      secondOverlayContainer.style.display = 'none';
+    });
+  });
+</script>
+
 {% endblock %}
