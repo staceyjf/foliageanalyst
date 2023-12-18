@@ -4,7 +4,7 @@
 {% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 
-<main id="add-plant" class="main-styling">
+<main id="carer-add" class="main-styling">
     <div class="container">
         <div class="section-header text-center pb5">
             {% if object %}
@@ -12,16 +12,24 @@
             {% else %}
             <h2>Add a new carer to your household</h2>
             {% endif %}
-        </div>
-
-        <form action="" method="POST" class="text-black">
-            {% csrf_token %}
-            <div class="mb-3">
-                {{ form.name|as_crispy_field }}
-                {{ form.nickname|as_crispy_field }}
-            </div>
+        <div class="wrapper-edit">
+            <form action="" method="POST" class="text-black">
+                {% csrf_token %}
+                {% if object %}
+                <div class="mb-3">
+                    {{ form.nickname|as_crispy_field}}
+                </div>
+                {% else %}
+                <div class="mb-3">
+                    {{ form.name|as_crispy_field }}
+                    {{ form.nickname|as_crispy_field }}
+                </div>
+                {% endif %}
                 <input type="submit" value="Submit" class="btn btn-secondary">
-        </form>
+            </form>
+            </div>
+        </div>
+    </div>
 </main>
 
 {% endblock%}

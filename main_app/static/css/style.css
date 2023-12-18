@@ -29,7 +29,6 @@ form {
 }
 
 /* carousel */
-
 .carousel-item {
   height: 100vh;
   min-height: 300px;
@@ -171,6 +170,36 @@ form {
     flex-direction: column;
 }
 
+/* Detail pages */
+.wrapper-details {
+  display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 90%;
+	margin: 5% auto;
+}
+
+/* Edit pages */
+.wrapper-edit {
+  display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 90%;
+	margin: 5% auto;
+}
+
+.details-profile {
+  width: 100%; /* Full width by default */
+  max-width: 500px; /* Adjust max-width as needed */
+  margin-bottom: 30px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 25px;
+}
+
 /* responsive CSS */
 
 @media only screen and (min-width:768px) and (max-width: 991px) {
@@ -184,10 +213,12 @@ form {
 }
 
 @media only screen and (max-width:767px) {
+  /* nav bar */
   .navbar-nav {
     text-align: center;
   }
 
+  /* carousel */
   .carousel-caption {
     bottom: 125px;
   }
@@ -204,5 +235,10 @@ form {
     width: 100%;
     line-height: 1.6;
     font-size: 12px;
+  }
+
+  /* Detail pages */
+  .details-profile {
+    max-width: 100%; /* Full width on smaller screens */
   }
 }
