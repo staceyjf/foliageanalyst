@@ -24,9 +24,9 @@ The application performs user centric CRUD (Create, Read, Update, Delete).
 
 ## About the Web App
 
-Welcome to Leaf Guardian – the go-to platform for plant enthusiasts seeking a seamless solution to monitor and nurture their leafy companions. W
+Welcome to your Leaf Guardian 'Foliage Analyst' – the go-to platform for plant enthusiasts seeking a seamless solution to monitor and nurture their leafy companions. 
 
-e recognize that caring for indoor foliage is an art, and we're here to make it both enjoyable and effortless for you. Our user-friendly web app empowers you to effortlessly record and track the well-being of your household plants, ensuring they receive the attention they deserve. Whether it's watering, feeding, or simply basking in the sunlight, Leaf Guardian is your trusted companion, offering a holistic approach to plant care. 
+We recognize that caring for indoor foliage is an art, and we're here to make it both enjoyable and effortless for you. Our user-friendly web app empowers you to effortlessly record and track the well-being of your household plants, ensuring they receive the attention they deserve. Whether it's watering, feeding, or simply basking in the sunlight, Foliage Analyst is your trusted companion, offering a holistic approach to plant care. 
 
 Join our community today and let us help you cultivate a thriving and vibrant indoor garden.
 
@@ -53,7 +53,7 @@ Join our community today and let us help you cultivate a thriving and vibrant in
 </div>
 
 ## Data Relationship
-<div align="center">
+<div align="left">
 <!-- <br>
 <img src="./public/images/datav2.png" width="400" height="400">
 <br> -->

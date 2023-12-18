@@ -28,11 +28,6 @@ form {
   height: 100vh;
 }
 
-#id_h2 {
-  color: #FEDC3D;
-  text-transform: uppercase;
-}
-
 /* carousel */
 
 .carousel-item {
@@ -85,7 +80,7 @@ form {
 
 /* cards */
 .wrapper {
-	display: flex;
+  display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	width: 90%;
@@ -93,7 +88,7 @@ form {
 }
 
 .product-area {
-	width: 30%;
+  width: 30%;
 	margin-bottom: 30px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	position: relative;
@@ -109,7 +104,7 @@ form {
 }
 
 .product-overlay {
-	position: absolute;
+  position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -118,13 +113,13 @@ form {
 }
 
 .product-overlay:hover {
-	opacity: 0.9;
+  opacity: 0.9;
 	background-color: rgba(0, 0, 0, 0.6);
 	transition: opacity 0.5s ease;
 }
 
 .overlay {
-	position: absolute;
+  position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -132,7 +127,7 @@ form {
 }
 
 .btn-1 {
-	display: inline-block;
+  display: inline-block;
 	padding: 10px 20px;
 	background-color: #e74c3c;
 	color: #fff;
@@ -159,13 +154,30 @@ form {
   padding-bottom: 5px;
 }
 
+/* About us */
+.about-h2 {
+  color: #FEDC3D;
+  text-transform: uppercase;
+}
+
+.about-img-1,
+.about-img-2 {
+    height: 100%; 
+}
+
+.about-parent {
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+}
+
 /* responsive CSS */
 
 @media only screen and (min-width:768px) and (max-width: 991px) {
   .carousel-caption {
     bottom: 300px;
   }
-
+  
   .carousel-caption p {
     width:100%;
   }
