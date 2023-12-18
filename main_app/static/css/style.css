@@ -170,27 +170,19 @@ form {
     flex-direction: column;
 }
 
-/* Detail pages */
+/* Edit pages */
+.wrapper-edit, 
 .wrapper-details {
   display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	width: 90%;
+	width: 100%;
 	margin: 5% auto;
 }
 
-/* Edit pages */
-.wrapper-edit {
-  display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	width: 400px;
-	margin: 5% auto;
-}
-
-.details-profile {
-  width: 100%; /* Full width by default */
-  max-width: 500px; /* Adjust max-width as needed */
+/* Detail pages */
+.details-profile,
+.plant-details-right-container {
   margin-bottom: 30px;
   padding: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -198,6 +190,10 @@ form {
   overflow: hidden;
   background-color: #fff;
   border-radius: 25px;
+}
+
+.details-profile {
+  max-width: 100%; /* Adjust max-width as needed */
 }
 
 /* responsive CSS */
