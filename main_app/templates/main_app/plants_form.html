@@ -17,15 +17,24 @@
         <div class="wrapper-edit">
             <form action="" method="POST" class="text-black">
                 {% csrf_token %}
+                {% if plants %}
+                <div class="mb-3">
+                    {{ form.plant_type|as_crispy_field }}
+                    {{ form.location|as_crispy_field }}
+                    {{ form.is_healthy|as_crispy_field }}
+                </div>
+                {% else %}
                 <div class="mb-3">
                     {{ form.name|as_crispy_field }}
                     {{ form.plant_type|as_crispy_field }}
                     {{ form.location|as_crispy_field }}
                     {{ form.is_healthy|as_crispy_field }}
                 </div>
-                    <input type="submit" value="Submit" class="btn btn-secondary">
+                {% endif %}
+                <input type="submit" value="Submit" class="btn btn-secondary">
             </form>
         </div>
 </main>
 
 {% endblock%}
+
