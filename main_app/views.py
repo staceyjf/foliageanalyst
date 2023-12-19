@@ -4,6 +4,7 @@ import boto3
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
+from django.views.decorators.http import require_http_methods
 # from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
 # model import - best practice is to call it singular which I will have to do next time
