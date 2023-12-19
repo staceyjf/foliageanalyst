@@ -24,5 +24,5 @@ urlpatterns = [
     path('carers/<int:pk>/update/', views.CarerUpdate.as_view(), name='carers_update'),
     path('carers/<int:pk>/delete/', views.CarerDelete.as_view(), name='carers_delete'),
     # associating carers with photos
-    path('carers/<int:carer_id>/add_photo/', views.add_photo, name='add_photo'),
+    path('carers/<int:pk>/add_photo/', views.add_photo, name='add_photo'),
 ]
