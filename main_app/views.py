@@ -101,7 +101,7 @@ def remove_carer(request, plant_id, carer_id):
   return redirect('details', plant_id=plant_id)
 
 ####### PHOTO ###########
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["POST"])
 def add_photo(request, pk):
     # photo-file will be the "name" attribute on the <input type="file">
     photo_file = request.FILES.get('photo-file', None)
