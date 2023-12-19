@@ -12,11 +12,11 @@ FERTILIZER = (
     ('N', 'N/A'),
 )
 
-# carer Model
+
+ ####### CARER  ###########
 class Carer(models.Model):
     name = models.CharField(max_length=100)
     nickname = models.CharField(max_length=100)
-    # TODO: ADD IMAGE FIELD
 
     #overwrite __str__
     def __str__(self):
@@ -26,7 +26,18 @@ class Carer(models.Model):
     def get_absolute_url(self):
         return reverse('carers_detail', kwargs={'pk': self.id})
 
-# Plant Model
+
+ ####### PHOTO  ###########
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    carer = models.ForeignKey(Carer, on_delete=models.CASCADE) 
+    #delete a carer it deletes the photos with the on_delete
+
+    def __str__(self):
+        return f"Photo for carer id: {self.carer_id} @ {self.url}"
+
+
+ ####### PLANT  ###########
 class Plants(models.Model):
     name = models.CharField(max_length=100)
     plant_type = models.CharField(max_length=100)

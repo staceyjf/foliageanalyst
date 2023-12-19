@@ -14,6 +14,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+ ####### PLANT ###########
 def plants_index(request):
   plants = Plants.objects.all().order_by('is_healthy','name') # creating the all dict from Plants model
   return render(request, 'plants/index.html', {
@@ -65,7 +66,7 @@ def add_care(request, plant_id):
     #need the cat id as its passed into the URL
   return redirect('details', plant_id=plant_id)
 
-# Carer CRUD
+ ####### CARER ###########
 class CarerList(ListView):
   model = Carer
 
@@ -95,3 +96,5 @@ def remove_carer(request, plant_id, carer_id):
   #add and remove() will also take ids 
   Plants.objects.get(id=plant_id).carers.remove(carer_id)
   return redirect('details', plant_id=plant_id)
+
+  ####### PHOTO  ###########
