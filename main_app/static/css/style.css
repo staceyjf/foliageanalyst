@@ -77,6 +77,12 @@ form {
   letter-spacing: 2px;
 }
 
+/* photos */
+.img-area-detail img {
+  height: 100%;
+  max-width: 300px;
+}
+
 /* cards */
 .wrapper {
   display: flex;

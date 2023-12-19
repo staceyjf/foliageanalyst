@@ -13,7 +13,12 @@
       {% for carer in carer_list %}
       <div class="product-area">
         <div class="img-area">
+          <!-- profile -->
+          {% for photo in carer.photo_set.all %}
+          <img class="rounded" src="{{photo.url}}">
+            {% empty %}
           <img src="{% static 'images/avt.png' %}" alt="placeholder image">
+          {% endfor %}
           <div class="product-overlay">
             <div class="overlay">
               <a href="{% url 'carers_detail' carer.id %}" class="btn-1">View Details</a>
