@@ -11,7 +11,7 @@
           <div class="img-area-detail">
             <!-- profile -->
             {% for photo in carer.photo_set.all %}
-              <img class="rounded" src="{{photo.url}}">
+              <img class="rounded" src="{{photo.url}}" alt="uploaded profile image">
             {% empty %}
               <img src="{% static 'images/avt.png' %}" alt="placeholder image">
             {% endfor %}
