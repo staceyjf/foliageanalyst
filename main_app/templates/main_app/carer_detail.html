@@ -6,51 +6,48 @@
   <div class="container">
     <div class="section-header text-center pb5 mt-3">
       <h2>Getting to know {{ object.name }}</h2>
-      <div class="wrapper-details">
-        <div class="details-profile">
-          <div class="img-area-detail">
-            <!-- profile -->
-            {% for photo in carer.photo_set.all %}
-              <img class="rounded" src="{{photo.url}}" alt="uploaded profile image">
-            {% empty %}
-              <img src="{% static 'images/avt.png' %}" alt="placeholder image">
-            {% endfor %}
-          </div>
-          
-          <div class="info-area">
-            <span class="span-list">Known around the house as '{{ object.nickname }}'</span>
-          </div>
+    </div>
+    <div class="wrapper-details">
+      <figure class="panel meta">
+          <!-- profile -->
+          {% for photo in carer.photo_set.all %}
+            <img class="avatar" src="{{photo.url}}" alt="uploaded profile image">
+          {% empty %}
+            <img class="avatar" src="{% static 'images/avt.png' %}" alt="placeholder image">
+          {% endfor %}
+        <figcaption>
+          <h3 class="title">Known around the house as</h3>
+          <h1 class="name">'{{ object.nickname }}'</h1>
+        </figcaption> 
+      </figure>
 
-          <!-- buttons -->
-          <!-- photo upload -->
-          <!-- Button to open the overlay -->
-          <button class="btn btn-secondary text-white" onclick="openOverlay()">Add Photo</button>
+      <div class="panel info">
+      <!-- buttons -->
+      <button class="btn btn-secondary text-white" onclick="openOverlay()">Add Photo</button>
+      <a href="{% url 'carers_update' carer.id %}" class="btn btn-secondary text-white">Edit</a>
+      <a href="{% url 'carers_delete' carer.id %}" class="btn btn-secondary text-white">Delete</a>
+      </div>
+    </div>
 
-          <div id="overlay" class="overlay-container">
-            <!-- Overlay content: Add Photo form -->
-            <div class="overlay-content">
-            <form
-              id="photoForm"
-              action="{% url 'add_photo' carer.id %}"
-              enctype="multipart/form-data"
-              method="POST"
-              class="card-panel"
-            >
-              {% csrf_token %}
-              <input type="file" name="photo-file">
-              <br><br>
-              <button type="submit" class="btn">Upload Photo</button>
-            </form>
-        
-
-            <!-- Button to close the overlay -->
-            <button class="btn btn-secondary text-white" onclick="closeOverlay()">Close</button>
-            </div>
-          </div>
-
-          <a href="{% url 'carers_update' carer.id %}" class="btn btn-secondary text-white">Edit</a>
-          <a href="{% url 'carers_delete' carer.id %}" class="btn btn-secondary text-white">Delete</a>
-        </div>
+    <!-- photo upload -->
+    <div id="overlay" class="overlay-container">
+      <!-- Overlay content: Add Photo form -->
+      <button class="close-btn btn btn-secondary text-white" onclick="closeOverlay()">x</button>
+      <br><br>
+      <div class="overlay-content">
+              <!-- Button to close the overlay -->
+      <form
+        id="photoForm"
+        action="{% url 'add_photo' carer.id %}"
+        enctype="multipart/form-data"
+        method="POST"
+        class="card-panel"
+      >
+        {% csrf_token %}
+        <input type="file" name="photo-file">
+        <br><br>
+        <button type="submit" class="btn btn-secondary text-white">Upload Photo</button>
+      </form>
       </div>
     </div>
   </div>
