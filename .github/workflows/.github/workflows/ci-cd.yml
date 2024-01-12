@@ -21,8 +21,12 @@ jobs:
 
       - name: Install Dependencies #install the project dependancies
         run: |
-          python -m pip install --upgrade pip
+          python3 -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Install Dependencies #update statics
+        run: |
+          python3 manage.py collectstatic
 
   test:
     runs-on: ubuntu-latest 
@@ -30,14 +34,14 @@ jobs:
 
     steps:
       - name: Apply Migrations
-        run: python manage.py migrate #capturing any changes in the models for postgres
+        run: python3 manage.py migrate #capturing any changes in the models for postgres
 
       - name: Run Tests
-        run: pytest
+        run: python3 manage.py test #run all tests
 
   deploy:
     runs-on: ubuntu-latest
-    needs: test
+    needs: test  #depends on all test passing
 
     steps:
       - name: Set up Heroku CLI
@@ -45,12 +49,14 @@ jobs:
         with:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: your-heroku-app-name
+          heroku_app_name: foliageanalyst
 
       - name: Deploy to Heroku
         run: git push heroku main
 
       - name: Run Django Collectstatic
-        run: python manage.py collectstatic --noinput
+        run: python3 manage.py collectstatic --noinput
 
-# Additional steps for environment variables and PostgreSQL setup if needed
+      - name: Run Migrations on Heroku
+        run: |
+          heroku run python manage.py migrate --app foliageanalyst

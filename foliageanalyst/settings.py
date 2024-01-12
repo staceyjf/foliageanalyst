@@ -85,12 +85,12 @@ WSGI_APPLICATION = 'foliageanalyst.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'foliageanalyst',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'foliageanalyst',
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
@@ -103,9 +103,17 @@ DATABASES = {
 #     }
 # }
 
-# DATABASES = {
-#     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-# }
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')),
+    'test': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'FoliageAnalyst_test_db',
+        'USER': 'tester_1',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
