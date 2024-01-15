@@ -1,17 +1,15 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.urls import reverse
 from main_app.models import Carer, Photo
 from main_app.views import add_photo
 
 # Photo upload test
-class TestAddPhoto(TestCase):
-    # This will run before each test method
+class TestAddPhoto(TransactionTestCase):
     def setUp(self):
-        # Create a test Carer
+        # create a test Carer
         self.carer = Carer.objects.create(nickname='Test Carer')
 
-    # This is your test method
     def test_add_photo(self):
         # Create a dummy photo file
         file_content = b'Test file contains this'
@@ -27,7 +25,6 @@ class TestAddPhoto(TestCase):
         # Check that a photo object is created in the database
         self.assertTrue(Photo.objects.filter(carer_id=self.carer.id).exists())
 
-    # This will run after each test method
     def tearDown(self):
         # remove the test objects (which is optional)
         self.carer.delete()

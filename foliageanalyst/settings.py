@@ -85,35 +85,24 @@ WSGI_APPLICATION = 'foliageanalyst.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'foliageanalyst',
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': '<DATABASE>',
-#         'USER': '<USER>',
-#         'PASSWORD': '<PASSWORD>',
-#         'HOST': '<HOST>',
-#         'PORT': '<PORT>',
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')),
-    'test': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'FoliageAnalyst_test_db',
-        'USER': 'tester_1',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'foliageanalyst',
     }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')),
+#     'test': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'foliageanalyst',
+#         'USER': 'tester_1',
+#         'PASSWORD': '1234',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
