@@ -37,7 +37,7 @@ jobs:
         run: python3 manage.py migrate #capturing any changes in the models for postgres
 
       - name: Run Tests
-        run: python3 manage.py test #run all tests
+        run: pytest #run all tests
 
   deploy:
     runs-on: ubuntu-latest

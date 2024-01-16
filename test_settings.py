@@ -15,7 +15,6 @@ import environ
 import os
 import sys
 from decouple import config
-import dj_database_url
 
 environ.Env()
 environ.Env.read_env()
@@ -105,7 +104,12 @@ WSGI_APPLICATION = 'foliageanalyst.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'foliageanalyst',
+        'USER': 'staceyf',
+        'PASSWORD': '1234',
+    }
 }
 
 # Password validation

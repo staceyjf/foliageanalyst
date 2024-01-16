@@ -36,6 +36,12 @@
 
 import pytest 
 
+from django.urls import reverse
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import Client 
+from main_app.models import Carer, Photo
+from main_app.views import add_photo
+
 @pytest.mark.django_db
 def test_add_profile_photo():
     databases = ['test']
@@ -48,17 +54,19 @@ def test_add_profile_photo():
     file = SimpleUploadedFile('test_image.jpg', file_content, content_type='image/jpeg')
 
     # create an add_photo URL and send a POST request to it
+    client = Client()
     url = reverse('add_photo', kwargs={'pk': carer.id})
     response = client.post(url, {'photo-file': file})
 
     # Check that the view redirects to carers_detail page
     # self.assertRedirects(response, reverse('carers_detail', kwargs={'pk': self.carer.id}))
-    try:
-        reverse('carers_detail', kwargs={'pk': carer.id})
-        pytest.fail('Exception raised')
-    except Exception:
-        carer.delete()
+    # try:
+    #     url = reverse('add_photo', kwargs={'pk': carer.id})
+    #     response = client.post(url, {'photo-file': file})
+    #     pytest.fail('Exception raised')
+    # except Exception:
+    #     carer.delete()
 
     # Check that a photo object is created in the database
     # self.assertTrue(Photo.objects.filter(carer_id=carer.id).exists())
-    assert(Photo.objects.filter(carer_id=carer.id).exists())
+    assert Photo.objects.filter(carer_id=carer.id).exists()
