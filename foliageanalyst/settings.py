@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'foliageanalyst.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'foliageanalyst',
+#         'NAME': 'foliageanalyst'
 #     }
 # }
 
@@ -108,10 +108,13 @@ DATABASES = {
     'test': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'FoliageAnalyst_test_db',
-        'USER': 'tester_1',
+        'USER': 'Tester_1',
         'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
+    },
+    'test_2': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'foliageanalyst',
     }
 }
 
