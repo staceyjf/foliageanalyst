@@ -29,9 +29,6 @@ jobs:
     needs: build #depends on the completion of the build job
 
     steps:
-      - name: Apply Migrations
-        run: python3 manage.py migrate #capturing any changes in the models for postgres
-
       - name: Run Tests
         run: pytest #run all tests
 
