@@ -12,16 +12,16 @@ from .models import Plants, Carer, Photo
 from .forms import CareForm
 
 # Created views
-@require_GET
+@require_http_methods(["GET"])
 def home(request):
     return render(request, 'home.html')
 
-@require_GET
+@require_http_methods(["GET"])
 def about(request):
     return render(request, 'about.html')
 
  ####### PLANT ###########
-@require_GET
+@require_http_methods(["GET"])
 def plants_index(request):
   plants = Plants.objects.all().order_by('is_healthy','name') # creating the all dict from Plants model
   return render(request, 'plants/index.html', {
@@ -30,7 +30,7 @@ def plants_index(request):
 
 # need additional args to accept the additional URL params
 # make sure it matches in the urls.py
-@require_GET
+@require_http_methods(["GET"])
 def plant_detail(request, plant_id):
   # define your variable, get() is like getOne in mongoose 
   # pass in the id to identify the object
@@ -63,7 +63,7 @@ class PlantDelete(DeleteView):
 
 # related models
 # writing the code for processing the FeedingForm
-@require_POST
+@require_http_methods(["POST"])
 def add_care(request, plant_id):
   form = CareForm(request.POST) 
   # like req.body
