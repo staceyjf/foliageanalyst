@@ -55,9 +55,6 @@ jobs:
       - name: Deploy to Heroku
         run: git push heroku main
 
-      - name: Run Django Collectstatic
-        run: python3 manage.py collectstatic --noinput
-
       - name: Run Migrations on Heroku
         run: |
           heroku run python3 manage.py migrate --app foliageanalyst
