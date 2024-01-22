@@ -45,6 +45,9 @@ jobs:
           heroku_app_name: "foliageanalyst"
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
 
+      - name: Fetch latest changes
+        run: git fetch origin main
+
       - name: Deploy to Heroku
         run: git push heroku main
 
@@ -53,4 +56,4 @@ jobs:
 
       - name: Run Migrations on Heroku
         run: |
-          heroku run python manage.py migrate --app foliageanalyst
+          heroku run python3 manage.py migrate --app foliageanalyst
