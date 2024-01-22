@@ -48,6 +48,10 @@ jobs:
       - name: Fetch latest changes
         run: git fetch origin main
 
+      - name: Set DISABLE_COLLECTSTATIC to False on Heroku
+        run: |
+          heroku config:set DISABLE_COLLECTSTATIC=0 --app foliageanalyst
+
       - name: Deploy to Heroku
         run: git push heroku main
 
