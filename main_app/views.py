@@ -12,13 +12,16 @@ from .models import Plants, Carer, Photo
 from .forms import CareForm
 
 # Created views
+@require_GET
 def home(request):
     return render(request, 'home.html')
 
+@require_GET
 def about(request):
     return render(request, 'about.html')
 
  ####### PLANT ###########
+@require_GET
 def plants_index(request):
   plants = Plants.objects.all().order_by('is_healthy','name') # creating the all dict from Plants model
   return render(request, 'plants/index.html', {
@@ -27,6 +30,7 @@ def plants_index(request):
 
 # need additional args to accept the additional URL params
 # make sure it matches in the urls.py
+@require_GET
 def plant_detail(request, plant_id):
   # define your variable, get() is like getOne in mongoose 
   # pass in the id to identify the object
@@ -59,6 +63,7 @@ class PlantDelete(DeleteView):
 
 # related models
 # writing the code for processing the FeedingForm
+@require_POST
 def add_care(request, plant_id):
   form = CareForm(request.POST) 
   # like req.body
@@ -91,11 +96,13 @@ class CarerDelete(DeleteView):
 
 # check inspector to see the association is made from 
 # the template before you write this
+@require_http_methods(["POST"])
 def assoc_carer(request, plant_id, carer_id):
   #add and remove() will also take ids 
   Plants.objects.get(id=plant_id).carers.add(carer_id)
   return redirect('details', plant_id=plant_id)
 
+@require_http_methods(["DELETE"])
 def remove_carer(request, plant_id, carer_id):
   #add and remove() will also take ids 
   Plants.objects.get(id=plant_id).carers.remove(carer_id)
