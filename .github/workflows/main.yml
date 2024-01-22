@@ -32,8 +32,8 @@ jobs:
     steps:
       - name: Run Tests
         run: |
-          pip freeze  # Print the installed packages
-          pytest  # Run all tests
+          pip freeze  
+          pytest 
 
   deploy:
     runs-on: ubuntu-latest
