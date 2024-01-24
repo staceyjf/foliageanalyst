@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.cache import cache_page
 # from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
 # model import - best practice is to call it singular which I will have to do next time
@@ -13,6 +14,7 @@ from .forms import CareForm
 
 # Created views
 @require_http_methods(["GET"])
+@cache_page(60 * 30) #caching for 30mins
 def home(request):
     return render(request, 'home.html')
 
