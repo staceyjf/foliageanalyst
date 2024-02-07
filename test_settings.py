@@ -156,6 +156,9 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 import django_heroku
 django_heroku.settings(locals())
+config = locals()
+config['STORAGES']['staticfiles'] = config['STATICFILES_STORAGE']
+del config['STATICFILES_STORAGE']
 
 # STATIC_ROOT = BASE_DIR / "staticfiles"
 

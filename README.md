@@ -6,7 +6,7 @@
 
 </div>
 
-Deployed site a work in progress
+Deployed at https://plant.staceyfanner.com/
 
 <div align="center">
 
