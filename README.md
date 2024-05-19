@@ -6,8 +6,6 @@
 
 </div>
 
-Deployed at https://plant.staceyfanner.com/
-
 <div align="center">
 
 </div>
